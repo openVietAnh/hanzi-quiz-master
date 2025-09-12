@@ -6,7 +6,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 
 interface ExerciseSelectionProps {
   username: string;
-  onStartQuiz: (type: "word-meaning" | "reverse-word-meaning" | "writing" | "listening") => void;
+  onStartQuiz: (type: "word-meaning" | "reverse-word-meaning" | "writing" | "listening" | "geography") => void;
   onLogout: () => void;
 }
 
@@ -106,7 +106,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             </CardContent>
           </Card>
 
-          {/* Coming Soon Exercises */}
+          {/* Listening Exercise */}
           <Card className="shadow-quiz bg-gradient-card border-0 hover:shadow-lg transition-smooth animate-slide-up h-full flex flex-col" style={{animationDelay: '0.2s'}}>
             <CardHeader className="flex-shrink-0">
               <div className="flex items-center justify-between">
@@ -130,6 +130,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             </CardContent>
           </Card>
 
+          {/* Writing Exercise */}
           <Card className="shadow-card bg-gradient-card border-0 hover:shadow-lg transition-smooth animate-slide-up h-full flex flex-col" style={{animationDelay: '0.3s'}}>
             <CardHeader className="flex-shrink-0">
               <div className="flex items-center justify-between">
@@ -146,6 +147,30 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             <CardContent className="flex-grow flex flex-col justify-end">
               <Button 
                 onClick={() => onStartQuiz("writing")}
+                className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
+              >
+                {t('startExercise')}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Geography Exercise */}
+          <Card className="shadow-quiz bg-gradient-card border-0 hover:shadow-lg transition-smooth animate-slide-up h-full flex flex-col" style={{animationDelay: '0.4s'}}>
+            <CardHeader className="flex-shrink-0">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
+                  <span className="chinese-text text-primary-foreground text-xl">地</span>
+                </div>
+                <Badge className="bg-success text-success-foreground">{t('available')}</Badge>
+              </div>
+              <CardTitle className="text-2xl chinese-text">{t('geographyExercise')}</CardTitle>
+              <CardDescription>
+                {t('geographyDesc')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow flex flex-col justify-end">
+              <Button 
+                onClick={() => onStartQuiz("geography")}
                 className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
               >
                 {t('startExercise')}

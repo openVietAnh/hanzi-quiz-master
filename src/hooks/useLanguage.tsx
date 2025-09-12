@@ -113,6 +113,25 @@ const translations = {
     nextQuestion: "Next Question",
     finalScore: "Final Score",
     score: "Score",
+    
+    // Geography Exercise
+    geographyExercise: "China Geography",
+    geographyDesc: "Click on the correct location on the China map",
+    findOnMap: "Find on Map",
+    clickOnMap: "Click on the correct location on the map",
+    chinaMap: "China Map",
+    correctLocation: "Correct location!",
+    incorrectLocation: "Incorrect! Distance: {{distance}}km away",
+    mapSetup: "Map Setup",
+    mapboxToken: "Mapbox Token",
+    enterMapboxToken: "Enter your Mapbox public token",
+    getMapboxToken: "Get your token from",
+    mapboxTokenRequired: "Mapbox token is required",
+    mapError: "Map initialization error",
+    province: "Province",
+    city: "City",
+    autonomous_region: "Autonomous Region",
+    municipality: "Municipality",
   },
   
   vi: {
@@ -217,6 +236,25 @@ const translations = {
     nextQuestion: "Câu hỏi tiếp theo",
     finalScore: "Điểm cuối cùng",
     score: "Điểm",
+    
+    // Geography Exercise
+    geographyExercise: "Địa lý Trung Quốc",
+    geographyDesc: "Nhấp vào vị trí đúng trên bản đồ Trung Quốc",
+    findOnMap: "Tìm trên Bản đồ",
+    clickOnMap: "Nhấp vào vị trí đúng trên bản đồ",
+    chinaMap: "Bản đồ Trung Quốc",
+    correctLocation: "Vị trí chính xác!",
+    incorrectLocation: "Sai! Khoảng cách: {{distance}}km",
+    mapSetup: "Thiết lập Bản đồ",
+    mapboxToken: "Token Mapbox",
+    enterMapboxToken: "Nhập token công khai Mapbox của bạn",
+    getMapboxToken: "Lấy token từ",
+    mapboxTokenRequired: "Cần có token Mapbox",
+    mapError: "Lỗi khởi tạo bản đồ",
+    province: "Tỉnh",
+    city: "Thành phố",
+    autonomous_region: "Khu tự trị",
+    municipality: "Thành phố trực thuộc",
   },
   
   zh: {
@@ -321,6 +359,25 @@ const translations = {
     nextQuestion: "下一题",
     finalScore: "最终得分",
     score: "得分",
+    
+    // Geography Exercise
+    geographyExercise: "中国地理",
+    geographyDesc: "在中国地图上点击正确的位置",
+    findOnMap: "在地图上查找",
+    clickOnMap: "在地图上点击正确位置",
+    chinaMap: "中国地图",
+    correctLocation: "位置正确！",
+    incorrectLocation: "错误！距离：{{distance}}公里",
+    mapSetup: "地图设置",
+    mapboxToken: "Mapbox令牌",
+    enterMapboxToken: "输入您的Mapbox公共令牌",
+    getMapboxToken: "从以下网站获取令牌",
+    mapboxTokenRequired: "需要Mapbox令牌",
+    mapError: "地图初始化错误",
+    province: "省",
+    city: "市",
+    autonomous_region: "自治区",
+    municipality: "直辖市",
   },
 };
 
