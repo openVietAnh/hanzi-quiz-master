@@ -9,6 +9,8 @@ import LoginPage from "./components/LoginPage";
 import ExerciseSelection from "./components/ExerciseSelection";
 import QuizPage from "./components/QuizPage";
 import SupportBubble from "./components/SupportBubble";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 
 type AppState = "login" | "selection" | "quiz";
 type ExerciseType = "word-meaning" | "reverse-word-meaning";
@@ -64,13 +66,35 @@ const App = () => {
         <LanguageProvider>
           <Toaster />
           <Sonner />
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <div className="flex-1">
-              {renderCurrentPage()}
+          {currentState === "login" ? (
+            // Login page without sidebar
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <div className="flex-1">
+                <LoginPage onLogin={handleLogin} />
+              </div>
+              <SupportBubble />
             </div>
-            <SupportBubble />
-          </div>
+          ) : (
+            // Main app with sidebar
+            <SidebarProvider>
+              <div className="flex min-h-screen w-full">
+                <AppSidebar username={currentUser} />
+                <SidebarInset>
+                  <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b">
+                    <SidebarTrigger className="-ml-1" />
+                    <div className="flex-1">
+                      <Header />
+                    </div>
+                  </header>
+                  <div className="flex-1 p-4">
+                    {renderCurrentPage()}
+                  </div>
+                </SidebarInset>
+                <SupportBubble />
+              </div>
+            </SidebarProvider>
+          )}
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>

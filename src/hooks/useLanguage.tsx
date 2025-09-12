@@ -78,6 +78,14 @@ const translations = {
     correctFeedback: "Correct!",
     greatJob: "Great job!",
     incorrectFeedback: "The correct answer is: {{answer}}",
+    
+    // Sidebar
+    learner: "Learner",
+    navigation: "Navigation",
+    dashboard: "Dashboard",
+    leaderboard: "Leaderboard", 
+    profile: "Profile",
+    settings: "Settings",
   },
   
   vi: {
@@ -147,6 +155,14 @@ const translations = {
     correctFeedback: "Đúng!",
     greatJob: "Làm tốt lắm!",
     incorrectFeedback: "Câu trả lời đúng là: {{answer}}",
+    
+    // Sidebar
+    learner: "Người học",
+    navigation: "Điều hướng",
+    dashboard: "Bảng điều khiển",
+    leaderboard: "Bảng xếp hạng",
+    profile: "Hồ sơ",
+    settings: "Cài đặt",
   },
   
   zh: {
@@ -216,6 +232,14 @@ const translations = {
     correctFeedback: "正确！",
     greatJob: "做得很好！",
     incorrectFeedback: "正确答案是：{{answer}}",
+    
+    // Sidebar
+    learner: "学习者",
+    navigation: "导航",
+    dashboard: "仪表板",
+    leaderboard: "排行榜",
+    profile: "个人资料",
+    settings: "设置",
   },
 };
 
