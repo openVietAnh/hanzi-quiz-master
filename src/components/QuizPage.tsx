@@ -24,6 +24,7 @@ const generateReverseOptions = (correctWord: ChineseWord): string[] => {
 const QuizPage = ({ onBack, exerciseType }: QuizPageProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<ChineseWord[]>([]);
+  const [currentOptions, setCurrentOptions] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -54,6 +55,18 @@ const QuizPage = ({ onBack, exerciseType }: QuizPageProps) => {
   useEffect(() => {
     initializeQuiz();
   }, [initializeQuiz]);
+
+  // Update options when question or exercise type changes
+  useEffect(() => {
+    if (questions.length > 0) {
+      const currentQuestion = questions[currentQuestionIndex];
+      if (exerciseType === "word-meaning") {
+        setCurrentOptions(currentQuestion.options);
+      } else {
+        setCurrentOptions(generateReverseOptions(currentQuestion));
+      }
+    }
+  }, [currentQuestionIndex, questions, exerciseType]);
 
   // Timer
   useEffect(() => {
@@ -250,36 +263,33 @@ const QuizPage = ({ onBack, exerciseType }: QuizPageProps) => {
               
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2">
-                  {(exerciseType === "word-meaning" 
-                    ? currentQuestion.options 
-                    : generateReverseOptions(currentQuestion)
-                    ).map((option, index) => {
-                      const correctAnswer = exerciseType === "word-meaning" 
-                        ? currentQuestion.correctAnswer 
-                        : currentQuestion.character;
-                      
-                      return (
-                        <Button
-                          key={index}
-                          variant={
-                            isAnswered
-                              ? option === correctAnswer
-                                ? "default"
-                                : option === selectedAnswer
-                                ? "destructive"
-                                : "secondary"
-                              : "outline"
-                          }
-                          className={`h-16 text-lg transition-smooth ${
-                            !isAnswered ? "hover:bg-primary hover:text-primary-foreground" : ""
-                          } ${exerciseType === "reverse-word-meaning" ? "chinese-text" : ""}`}
-                          onClick={() => handleAnswerSelect(option)}
-                          disabled={isAnswered}
-                        >
-                          {option}
-                        </Button>
-                      );
-                    })}
+                  {currentOptions.map((option, index) => {
+                    const correctAnswer = exerciseType === "word-meaning" 
+                      ? currentQuestion.correctAnswer 
+                      : currentQuestion.character;
+                    
+                    return (
+                      <Button
+                        key={index}
+                        variant={
+                          isAnswered
+                            ? option === correctAnswer
+                              ? "default"
+                              : option === selectedAnswer
+                              ? "destructive"
+                              : "secondary"
+                            : "outline"
+                        }
+                        className={`h-16 text-lg transition-smooth ${
+                          !isAnswered ? "hover:bg-primary hover:text-primary-foreground" : ""
+                        } ${exerciseType === "reverse-word-meaning" ? "chinese-text" : ""}`}
+                        onClick={() => handleAnswerSelect(option)}
+                        disabled={isAnswered}
+                      >
+                        {option}
+                      </Button>
+                    );
+                  })}
                 </div>
 
                 {/* Feedback */}
