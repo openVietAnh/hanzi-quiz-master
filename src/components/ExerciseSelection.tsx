@@ -17,10 +17,10 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
         <header className="flex justify-between items-center mb-8 animate-fade-in">
           <div>
             <h1 className="text-4xl font-bold chinese-text bg-gradient-hero bg-clip-text text-transparent">
-              练习选择
+              Exercise Selection
             </h1>
             <p className="text-xl text-muted-foreground mt-2">
-              欢迎回来, <span className="font-semibold text-primary">{username}</span>
+              Welcome back, <span className="font-semibold text-primary">{username}</span>
             </p>
           </div>
           <Button 
@@ -29,7 +29,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             className="flex items-center gap-2 hover:bg-destructive hover:text-destructive-foreground transition-smooth"
           >
             <LogOut size={18} />
-            退出登录
+            Logout
           </Button>
         </header>
 
@@ -42,28 +42,28 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
                   <BookOpen className="text-primary-foreground" size={24} />
                 </div>
-                <Badge className="bg-success text-success-foreground">可用</Badge>
+                <Badge className="bg-success text-success-foreground">Available</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text">词汇含义</CardTitle>
+              <CardTitle className="text-2xl chinese-text">Word Meaning</CardTitle>
               <CardDescription className="text-base">
-                选择正确的中文词汇含义
+                Choose the correct meaning of Chinese words
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock size={16} />
-                  <span>计时练习</span>
+                  <span>Timed Exercise</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Target size={16} />
-                  <span>实时统计</span>
+                  <span>Real-time Statistics</span>
                 </div>
                 <Button 
                   onClick={onStartQuiz}
                   className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
                 >
-                  开始练习
+                  Start Exercise
                 </Button>
               </div>
             </CardContent>
@@ -76,16 +76,16 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
                   <span className="chinese-text text-muted-foreground text-xl">听</span>
                 </div>
-                <Badge variant="secondary">即将推出</Badge>
+                <Badge variant="secondary">Coming Soon</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text text-muted-foreground">听力练习</CardTitle>
+              <CardTitle className="text-2xl chinese-text text-muted-foreground">Listening Exercise</CardTitle>
               <CardDescription>
-                听音频，选择正确答案
+                Listen to audio and choose the correct answer
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button disabled className="w-full">
-                即将推出
+                Coming Soon
               </Button>
             </CardContent>
           </Card>
@@ -96,16 +96,16 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
                   <span className="chinese-text text-muted-foreground text-xl">写</span>
                 </div>
-                <Badge variant="secondary">即将推出</Badge>
+                <Badge variant="secondary">Coming Soon</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text text-muted-foreground">写字练习</CardTitle>
+              <CardTitle className="text-2xl chinese-text text-muted-foreground">Writing Exercise</CardTitle>
               <CardDescription>
-                练习汉字笔画顺序
+                Practice Chinese character stroke order
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button disabled className="w-full">
-                即将推出
+                Coming Soon
               </Button>
             </CardContent>
           </Card>
@@ -113,30 +113,30 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
 
         {/* Stats Section */}
         <div className="mt-12 animate-fade-in" style={{animationDelay: '0.3s'}}>
-          <h2 className="text-2xl font-bold mb-6 chinese-text">学习进度</h2>
+          <h2 className="text-2xl font-bold mb-6 chinese-text">Learning Progress</h2>
           <div className="grid gap-4 md:grid-cols-4">
             <Card className="bg-gradient-success text-success-foreground border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold">0</div>
-                <div className="text-sm opacity-90">完成练习</div>
+                <div className="text-sm opacity-90">Exercises Completed</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0%</div>
-                <div className="text-sm text-muted-foreground">正确率</div>
+                <div className="text-sm text-muted-foreground">Accuracy Rate</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0</div>
-                <div className="text-sm text-muted-foreground">学习天数</div>
+                <div className="text-sm text-muted-foreground">Learning Days</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0</div>
-                <div className="text-sm text-muted-foreground">掌握词汇</div>
+                <div className="text-sm text-muted-foreground">Words Mastered</div>
               </CardContent>
             </Card>
           </div>

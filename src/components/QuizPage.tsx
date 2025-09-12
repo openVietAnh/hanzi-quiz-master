@@ -52,8 +52,8 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
     } else if (timeLeft === 0 && !isQuizFinished) {
       setIsQuizFinished(true);
       toast({
-        title: "时间到！",
-        description: `你完成了 ${totalQuestions} 道题，正确 ${correctAnswers} 道`,
+        title: "Time's up!",
+        description: `You completed ${totalQuestions} questions, ${correctAnswers} correct`,
       });
     }
   }, [timeLeft, isQuizFinished, totalQuestions, correctAnswers, toast]);
@@ -83,13 +83,13 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
     if (correct) {
       setCorrectAnswers(prev => prev + 1);
       toast({
-        title: "正确！",
-        description: "恭喜你答对了！",
+        title: "Correct!",
+        description: "Great job!",
       });
     } else {
       toast({
-        title: "错误",
-        description: `正确答案是：${currentQuestion.correctAnswer}`,
+        title: "Incorrect",
+        description: `The correct answer is: ${currentQuestion.correctAnswer}`,
         variant: "destructive",
       });
     }
@@ -108,8 +108,8 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
       // Quiz finished
       setIsQuizFinished(true);
       toast({
-        title: "练习完成！",
-        description: `你完成了 ${totalQuestions} 道题，正确 ${correctAnswers} 道`,
+        title: "Exercise Complete!",
+        description: `You completed ${totalQuestions} questions, ${correctAnswers} correct`,
       });
     }
   };
@@ -121,7 +121,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
   };
 
   if (questions.length === 0) {
-    return <div className="min-h-screen flex items-center justify-center">加载中...</div>;
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -136,20 +136,20 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <div className="mx-auto w-16 h-16 bg-gradient-success rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="text-success-foreground" size={32} />
             </div>
-            <CardTitle className="text-3xl chinese-text">练习完成！</CardTitle>
+            <CardTitle className="text-3xl chinese-text">Exercise Complete!</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-center">
             <div className="space-y-4">
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>完成题目：</span>
+                <span>Questions Completed:</span>
                 <span className="font-bold text-primary">{totalQuestions}</span>
               </div>
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>正确答案：</span>
+                <span>Correct Answers:</span>
                 <span className="font-bold text-success">{correctAnswers}</span>
               </div>
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>正确率：</span>
+                <span>Accuracy Rate:</span>
                 <span className="font-bold text-primary">{accuracy}%</span>
               </div>
             </div>
@@ -157,10 +157,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <div className="flex gap-4">
               <Button onClick={initializeQuiz} className="flex-1 bg-gradient-hero hover:opacity-90">
                 <RotateCcw className="mr-2" size={18} />
-                再次练习
+                Try Again
               </Button>
               <Button onClick={onBack} variant="outline" className="flex-1">
-                返回选择
+                Back to Selection
               </Button>
             </div>
           </CardContent>
@@ -180,7 +180,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             className="flex items-center gap-2 hover:bg-primary hover:text-primary-foreground transition-smooth"
           >
             <ArrowLeft size={18} />
-            返回
+            Back
           </Button>
           
           <div className="flex items-center gap-4">
@@ -198,10 +198,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <div className="mb-6 animate-slide-up">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-muted-foreground">
-                  题目 {currentQuestionIndex + 1} / {questions.length}
+                  Question {currentQuestionIndex + 1} / {questions.length}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  {Math.round(progress)}% 完成
+                  {Math.round(progress)}% Complete
                 </span>
               </div>
               <Progress value={progress} className="h-2" />
@@ -211,7 +211,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <Card className="shadow-quiz bg-gradient-card border-0 animate-bounce-in">
               <CardHeader className="text-center">
                 <CardTitle className="text-sm text-muted-foreground mb-4">
-                  选择正确的含义
+                  Choose the correct meaning
                 </CardTitle>
                 <div className="space-y-2">
                   <div className="text-6xl chinese-text font-bold text-primary mb-2">
@@ -260,20 +260,20 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-error">
                           <XCircle size={24} />
-                          <span className="text-lg font-medium">错误</span>
+                          <span className="text-lg font-medium">Incorrect</span>
                         </div>
                         <p className="text-muted-foreground">
-                          正确答案是：<span className="font-bold text-primary">{currentQuestion.correctAnswer}</span>
+                          Correct answer is: <span className="font-bold text-primary">{currentQuestion.correctAnswer}</span>
                         </p>
                       </div>
                     )}
                     
                     {countdown && (
-                      <div className="mt-4 text-center">
-                        <p className="text-muted-foreground">
-                          {countdown} 秒后进入下一题
-                        </p>
-                      </div>
+                    <div className="mt-4 text-center">
+                      <p className="text-muted-foreground">
+                        Next question in {countdown} seconds
+                      </p>
+                    </div>
                     )}
                   </div>
                 )}
@@ -285,27 +285,27 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
           <div className="lg:col-span-1">
             <Card className="shadow-card bg-gradient-card border-0 sticky top-6 animate-slide-up">
               <CardHeader>
-                <CardTitle className="text-xl chinese-text">统计</CardTitle>
+                <CardTitle className="text-xl chinese-text">Statistics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-primary">{totalQuestions}</div>
-                  <div className="text-sm text-muted-foreground">已完成</div>
+                  <div className="text-sm text-muted-foreground">Completed</div>
                 </div>
                 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-success">{correctAnswers}</div>
-                  <div className="text-sm text-muted-foreground">正确答案</div>
+                  <div className="text-sm text-muted-foreground">Correct</div>
                 </div>
                 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-primary">{accuracy}%</div>
-                  <div className="text-sm text-muted-foreground">正确率</div>
+                  <div className="text-sm text-muted-foreground">Accuracy</div>
                 </div>
 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-warning">{formatTime(timeLeft)}</div>
-                  <div className="text-sm text-muted-foreground">剩余时间</div>
+                  <div className="text-sm text-muted-foreground">Time Left</div>
                 </div>
               </CardContent>
             </Card>

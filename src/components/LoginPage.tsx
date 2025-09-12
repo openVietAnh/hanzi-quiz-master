@@ -35,14 +35,14 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
 
     if (user) {
       toast({
-        title: "登录成功!",
-        description: `欢迎, ${username}!`,
+        title: "Login Successful!",
+        description: `Welcome, ${username}!`,
       });
       onLogin(username);
     } else {
       toast({
-        title: "登录失败",
-        description: "用户名或密码错误",
+        title: "Login Failed",
+        description: "Invalid username or password",
         variant: "destructive",
       });
     }
@@ -65,36 +65,36 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               <span className="text-2xl chinese-text text-primary-foreground">学</span>
             </div>
             <CardTitle className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              中文学习
+              Chinese Learning
             </CardTitle>
             <CardDescription className="text-muted-foreground text-lg">
-              欢迎来到中文学习平台
+              Welcome to the Chinese Learning Platform
             </CardDescription>
           </CardHeader>
           
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="username">用户名</Label>
+                <Label htmlFor="username">Username</Label>
                 <Input
                   id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="输入用户名"
+                  placeholder="Enter username"
                   required
                   className="h-12 text-lg transition-smooth focus:ring-2 focus:ring-primary"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">密码</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="输入密码"
+                  placeholder="Enter password"
                   required
                   className="h-12 text-lg transition-smooth focus:ring-2 focus:ring-primary"
                 />
@@ -105,15 +105,15 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
                 className="w-full h-12 text-lg bg-gradient-hero hover:opacity-90 transition-smooth shadow-button animate-slide-up"
                 disabled={isLoading}
               >
-                {isLoading ? "登录中..." : "登录"}
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
 
             <div className="mt-6 p-4 bg-accent/50 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-2">测试账户:</p>
+              <p className="text-sm text-muted-foreground mb-2">Test Accounts:</p>
               <div className="space-y-1 text-sm">
-                <div>用户名: student1, 密码: password1</div>
-                <div>用户名: student2, 密码: password2</div>
+                <div>Username: student1, Password: password1</div>
+                <div>Username: student2, Password: password2</div>
               </div>
             </div>
           </CardContent>
