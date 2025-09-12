@@ -81,13 +81,13 @@ const App = () => {
               <div className="flex min-h-screen w-full">
                 <AppSidebar username={currentUser} />
                 <SidebarInset>
-                  <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b">
-                    <SidebarTrigger className="-ml-1" />
-                    <div className="flex-1">
-                      <Header />
-                    </div>
+                  <header className="flex h-16 shrink-0 items-center px-4 border-b">
+                    <Header />
                   </header>
                   <div className="flex-1 p-4">
+                    <div className="mb-4">
+                      <SidebarTrigger className="mb-4" />
+                    </div>
                     {renderCurrentPage()}
                   </div>
                 </SidebarInset>
