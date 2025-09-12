@@ -6,13 +6,16 @@ const SupportBubble = () => {
   const [position, setPosition] = useState({ x: 20, y: 20 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [hasMoved, setHasMoved] = useState(false);
   const bubbleRef = useRef<HTMLButtonElement>(null);
 
   // Replace with your actual GitHub profile URL
   const githubUrl = "https://github.com/yourusername";
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsDragging(true);
+    setHasMoved(false);
     setDragStart({
       x: e.clientX - position.x,
       y: e.clientY - position.y,
@@ -25,15 +28,26 @@ const SupportBubble = () => {
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
     
+    // Check if movement threshold is exceeded (more than 3px)
+    const moveThreshold = 3;
+    const deltaX = Math.abs(newX - position.x);
+    const deltaY = Math.abs(newY - position.y);
+    
+    if (deltaX > moveThreshold || deltaY > moveThreshold) {
+      setHasMoved(true);
+    }
+    
     // Keep bubble within viewport bounds
     const maxX = window.innerWidth - 60;
     const maxY = window.innerHeight - 60;
     
-    setPosition({
+    const clampedPosition = {
       x: Math.max(0, Math.min(newX, maxX)),
       y: Math.max(0, Math.min(newY, maxY)),
-    });
-  }, [isDragging, dragStart.x, dragStart.y]);
+    };
+    
+    setPosition(clampedPosition);
+  }, [isDragging, dragStart.x, dragStart.y, position.x, position.y]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -56,8 +70,8 @@ const SupportBubble = () => {
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   const handleClick = (e: React.MouseEvent) => {
-    // Only redirect if we're not dragging
-    if (!isDragging) {
+    // Only redirect if the bubble hasn't been moved
+    if (!hasMoved) {
       e.preventDefault();
       window.open(githubUrl, "_blank", "noopener,noreferrer");
     }
