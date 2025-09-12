@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/useLanguage";
 import heroImage from "@/assets/hero-chinese-learning.jpg";
 
 interface LoginPageProps {
@@ -21,6 +22,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,14 +37,14 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
 
     if (user) {
       toast({
-        title: "Login Successful!",
-        description: `Welcome, ${username}!`,
+        title: t('loginSuccessful'),
+        description: t('welcome', { username }),
       });
       onLogin(username);
     } else {
       toast({
-        title: "Login Failed",
-        description: "Invalid username or password",
+        title: t('loginFailed'),
+        description: t('invalidCredentials'),
         variant: "destructive",
       });
     }
@@ -51,7 +53,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-accent/20 p-4">
+    <div className="flex items-center justify-center bg-gradient-to-br from-background to-accent/20 p-4" style={{ minHeight: 'calc(100vh - 80px)' }}>
       {/* Hero Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-10"
@@ -65,36 +67,36 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               <span className="text-2xl chinese-text text-primary-foreground">学</span>
             </div>
             <CardTitle className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              Chinese Learning
+              {t('loginTitle')}
             </CardTitle>
             <CardDescription className="text-muted-foreground text-lg">
-              Welcome to the Chinese Learning Platform
+              {t('loginSubtitle')}
             </CardDescription>
           </CardHeader>
           
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">{t('username')}</Label>
                 <Input
                   id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter username"
+                  placeholder={t('enterUsername')}
                   required
                   className="h-12 text-lg transition-smooth focus:ring-2 focus:ring-primary"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('password')}</Label>
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter password"
+                  placeholder={t('enterPassword')}
                   required
                   className="h-12 text-lg transition-smooth focus:ring-2 focus:ring-primary"
                 />
@@ -105,15 +107,15 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
                 className="w-full h-12 text-lg bg-gradient-hero hover:opacity-90 transition-smooth shadow-button animate-slide-up"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? t('loggingIn') : t('login')}
               </Button>
             </form>
 
             <div className="mt-6 p-4 bg-accent/50 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-2">Test Accounts:</p>
+              <p className="text-sm text-muted-foreground mb-2">{t('testAccounts')}</p>
               <div className="space-y-1 text-sm">
-                <div>Username: student1, Password: password1</div>
-                <div>Username: student2, Password: password2</div>
+                <div>{t('username')}: student1, {t('password')}: password1</div>
+                <div>{t('username')}: student2, {t('password')}: password2</div>
               </div>
             </div>
           </CardContent>

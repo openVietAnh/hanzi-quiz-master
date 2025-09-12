@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Timer, CheckCircle, XCircle, RotateCcw } from "lucide-react";
 import { chineseWords, shuffleArray, type ChineseWord } from "@/data/chineseWords";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface QuizPageProps {
   onBack: () => void;
@@ -23,6 +24,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   // Initialize quiz
   const initializeQuiz = useCallback(() => {
@@ -52,8 +54,8 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
     } else if (timeLeft === 0 && !isQuizFinished) {
       setIsQuizFinished(true);
       toast({
-        title: "Time's up!",
-        description: `You completed ${totalQuestions} questions, ${correctAnswers} correct`,
+        title: t('timeUp'),
+        description: t('quizSummary', { total: totalQuestions, correct: correctAnswers }),
       });
     }
   }, [timeLeft, isQuizFinished, totalQuestions, correctAnswers, toast]);
@@ -83,13 +85,13 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
     if (correct) {
       setCorrectAnswers(prev => prev + 1);
       toast({
-        title: "Correct!",
-        description: "Great job!",
+        title: t('correctFeedback'),
+        description: t('greatJob'),
       });
     } else {
       toast({
-        title: "Incorrect",
-        description: `The correct answer is: ${currentQuestion.correctAnswer}`,
+        title: t('incorrect'),
+        description: t('incorrectFeedback', { answer: currentQuestion.correctAnswer }),
         variant: "destructive",
       });
     }
@@ -108,8 +110,8 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
       // Quiz finished
       setIsQuizFinished(true);
       toast({
-        title: "Exercise Complete!",
-        description: `You completed ${totalQuestions} questions, ${correctAnswers} correct`,
+        title: t('exerciseComplete'),
+        description: t('quizSummary', { total: totalQuestions, correct: correctAnswers }),
       });
     }
   };
@@ -130,26 +132,26 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
 
   if (isQuizFinished) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-accent/20 p-4 flex items-center justify-center">
+      <div className="bg-gradient-to-br from-background to-accent/20 p-4 flex items-center justify-center" style={{ minHeight: 'calc(100vh - 80px)' }}>
         <Card className="shadow-quiz bg-gradient-card border-0 max-w-lg w-full animate-bounce-in">
           <CardHeader className="text-center">
             <div className="mx-auto w-16 h-16 bg-gradient-success rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="text-success-foreground" size={32} />
             </div>
-            <CardTitle className="text-3xl chinese-text">Exercise Complete!</CardTitle>
+            <CardTitle className="text-3xl chinese-text">{t('exerciseComplete')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-center">
             <div className="space-y-4">
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>Questions Completed:</span>
+                <span>{t('questionsCompleted')}</span>
                 <span className="font-bold text-primary">{totalQuestions}</span>
               </div>
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>Correct Answers:</span>
+                <span>{t('correctAnswers')}</span>
                 <span className="font-bold text-success">{correctAnswers}</span>
               </div>
               <div className="flex justify-between items-center p-4 bg-accent/50 rounded-lg">
-                <span>Accuracy Rate:</span>
+                <span>{t('accuracyRate')}</span>
                 <span className="font-bold text-primary">{accuracy}%</span>
               </div>
             </div>
@@ -157,10 +159,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <div className="flex gap-4">
               <Button onClick={initializeQuiz} className="flex-1 bg-gradient-hero hover:opacity-90">
                 <RotateCcw className="mr-2" size={18} />
-                Try Again
+                {t('tryAgain')}
               </Button>
               <Button onClick={onBack} variant="outline" className="flex-1">
-                Back to Selection
+                {t('backToSelection')}
               </Button>
             </div>
           </CardContent>
@@ -170,7 +172,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-accent/20 p-4">
+    <div className="bg-gradient-to-br from-background to-accent/20 p-4" style={{ minHeight: 'calc(100vh - 80px)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="flex justify-between items-center mb-6 animate-fade-in">
@@ -180,7 +182,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             className="flex items-center gap-2 hover:bg-primary hover:text-primary-foreground transition-smooth"
           >
             <ArrowLeft size={18} />
-            Back
+            {t('back')}
           </Button>
           
           <div className="flex items-center gap-4">
@@ -198,10 +200,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <div className="mb-6 animate-slide-up">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-muted-foreground">
-                  Question {currentQuestionIndex + 1} / {questions.length}
+                  {t('questionProgress', { current: currentQuestionIndex + 1, total: questions.length })}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  {Math.round(progress)}% Complete
+                  {t('percentComplete', { percent: Math.round(progress) })}
                 </span>
               </div>
               <Progress value={progress} className="h-2" />
@@ -211,7 +213,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <Card className="shadow-quiz bg-gradient-card border-0 animate-bounce-in">
               <CardHeader className="text-center">
                 <CardTitle className="text-sm text-muted-foreground mb-4">
-                  Choose the correct meaning
+                  {t('chooseCorrectMeaning')}
                 </CardTitle>
                 <div className="space-y-2">
                   <div className="text-6xl chinese-text font-bold text-primary mb-2">
@@ -260,10 +262,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-error">
                           <XCircle size={24} />
-                          <span className="text-lg font-medium">Incorrect</span>
+                          <span className="text-lg font-medium">{t('incorrect')}</span>
                         </div>
                         <p className="text-muted-foreground">
-                          Correct answer is: <span className="font-bold text-primary">{currentQuestion.correctAnswer}</span>
+                          {t('correctAnswerIs', { answer: currentQuestion.correctAnswer })}
                         </p>
                       </div>
                     )}
@@ -271,7 +273,7 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
                     {countdown && (
                     <div className="mt-4 text-center">
                       <p className="text-muted-foreground">
-                        Next question in {countdown} seconds
+                        {t('nextQuestionIn', { seconds: countdown })}
                       </p>
                     </div>
                     )}
@@ -285,27 +287,27 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
           <div className="lg:col-span-1">
             <Card className="shadow-card bg-gradient-card border-0 sticky top-6 animate-slide-up">
               <CardHeader>
-                <CardTitle className="text-xl chinese-text">Statistics</CardTitle>
+                <CardTitle className="text-xl chinese-text">{t('statistics')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-primary">{totalQuestions}</div>
-                  <div className="text-sm text-muted-foreground">Completed</div>
+                  <div className="text-sm text-muted-foreground">{t('completed')}</div>
                 </div>
                 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-success">{correctAnswers}</div>
-                  <div className="text-sm text-muted-foreground">Correct</div>
+                  <div className="text-sm text-muted-foreground">{t('correct')}</div>
                 </div>
                 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-primary">{accuracy}%</div>
-                  <div className="text-sm text-muted-foreground">Accuracy</div>
+                  <div className="text-sm text-muted-foreground">{t('accuracy')}</div>
                 </div>
 
                 <div className="text-center p-4 bg-accent/50 rounded-lg">
                   <div className="text-2xl font-bold text-warning">{formatTime(timeLeft)}</div>
-                  <div className="text-sm text-muted-foreground">Time Left</div>
+                  <div className="text-sm text-muted-foreground">{t('timeLeft')}</div>
                 </div>
               </CardContent>
             </Card>

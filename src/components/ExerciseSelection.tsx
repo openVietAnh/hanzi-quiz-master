@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Target, BookOpen, LogOut } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface ExerciseSelectionProps {
   username: string;
@@ -10,17 +11,19 @@ interface ExerciseSelectionProps {
 }
 
 const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectionProps) => {
+  const { t } = useLanguage();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-accent/20 p-4">
+    <div className="bg-gradient-to-br from-background to-accent/20 p-4" style={{ minHeight: 'calc(100vh - 80px)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="flex justify-between items-center mb-8 animate-fade-in">
           <div>
             <h1 className="text-4xl font-bold chinese-text bg-gradient-hero bg-clip-text text-transparent">
-              Exercise Selection
+              {t('exerciseSelection')}
             </h1>
             <p className="text-xl text-muted-foreground mt-2">
-              Welcome back, <span className="font-semibold text-primary">{username}</span>
+              {t('welcomeBack', { username })}
             </p>
           </div>
           <Button 
@@ -29,7 +32,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             className="flex items-center gap-2 hover:bg-destructive hover:text-destructive-foreground transition-smooth"
           >
             <LogOut size={18} />
-            Logout
+            {t('logout')}
           </Button>
         </header>
 
@@ -42,28 +45,28 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
                   <BookOpen className="text-primary-foreground" size={24} />
                 </div>
-                <Badge className="bg-success text-success-foreground">Available</Badge>
+                <Badge className="bg-success text-success-foreground">{t('available')}</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text">Word Meaning</CardTitle>
+              <CardTitle className="text-2xl chinese-text">{t('wordMeaning')}</CardTitle>
               <CardDescription className="text-base">
-                Choose the correct meaning of Chinese words
+                {t('wordMeaningDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock size={16} />
-                  <span>Timed Exercise</span>
+                  <span>{t('timedExercise')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Target size={16} />
-                  <span>Real-time Statistics</span>
+                  <span>{t('realtimeStats')}</span>
                 </div>
                 <Button 
                   onClick={onStartQuiz}
                   className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
                 >
-                  Start Exercise
+                  {t('startExercise')}
                 </Button>
               </div>
             </CardContent>
@@ -76,16 +79,16 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
                   <span className="chinese-text text-muted-foreground text-xl">听</span>
                 </div>
-                <Badge variant="secondary">Coming Soon</Badge>
+                <Badge variant="secondary">{t('comingSoon')}</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text text-muted-foreground">Listening Exercise</CardTitle>
+              <CardTitle className="text-2xl chinese-text text-muted-foreground">{t('listeningExercise')}</CardTitle>
               <CardDescription>
-                Listen to audio and choose the correct answer
+                {t('listeningDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button disabled className="w-full">
-                Coming Soon
+                {t('comingSoon')}
               </Button>
             </CardContent>
           </Card>
@@ -96,16 +99,16 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
                   <span className="chinese-text text-muted-foreground text-xl">写</span>
                 </div>
-                <Badge variant="secondary">Coming Soon</Badge>
+                <Badge variant="secondary">{t('comingSoon')}</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text text-muted-foreground">Writing Exercise</CardTitle>
+              <CardTitle className="text-2xl chinese-text text-muted-foreground">{t('writingExercise')}</CardTitle>
               <CardDescription>
-                Practice Chinese character stroke order
+                {t('writingDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button disabled className="w-full">
-                Coming Soon
+                {t('comingSoon')}
               </Button>
             </CardContent>
           </Card>
@@ -113,30 +116,30 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
 
         {/* Stats Section */}
         <div className="mt-12 animate-fade-in" style={{animationDelay: '0.3s'}}>
-          <h2 className="text-2xl font-bold mb-6 chinese-text">Learning Progress</h2>
+          <h2 className="text-2xl font-bold mb-6 chinese-text">{t('learningProgress')}</h2>
           <div className="grid gap-4 md:grid-cols-4">
             <Card className="bg-gradient-success text-success-foreground border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold">0</div>
-                <div className="text-sm opacity-90">Exercises Completed</div>
+                <div className="text-sm opacity-90">{t('exercisesCompleted')}</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0%</div>
-                <div className="text-sm text-muted-foreground">Accuracy Rate</div>
+                <div className="text-sm text-muted-foreground">{t('accuracyRate')}</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0</div>
-                <div className="text-sm text-muted-foreground">Learning Days</div>
+                <div className="text-sm text-muted-foreground">{t('learningDays')}</div>
               </CardContent>
             </Card>
             <Card className="bg-gradient-card border-0">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-primary">0</div>
-                <div className="text-sm text-muted-foreground">Words Mastered</div>
+                <div className="text-sm text-muted-foreground">{t('wordsMastered')}</div>
               </CardContent>
             </Card>
           </div>
