@@ -100,6 +100,19 @@ const translations = {
     yourScore: "Your Score",
     goodWork: "Good work!",
     keepPracticing: "Keep practicing!",
+    
+    // Listening Exercise
+    listenAndChoose: "Listen and Choose",
+    clickToPlay: "Click the speaker to play audio",
+    selectCorrectCharacter: "Select the correct character you heard",
+    playAudioFirst: "Play the audio first before selecting",
+    chooseCorrectCharacter: "Choose the Correct Character",
+    playing: "Playing",
+    audioError: "Audio playback error",
+    audioNotSupported: "Audio not supported",
+    nextQuestion: "Next Question",
+    finalScore: "Final Score",
+    score: "Score",
   },
   
   vi: {
@@ -191,6 +204,19 @@ const translations = {
     yourScore: "Điểm của bạn",
     goodWork: "Làm tốt!",
     keepPracticing: "Tiếp tục luyện tập!",
+    
+    // Listening Exercise
+    listenAndChoose: "Nghe và Chọn",
+    clickToPlay: "Nhấp vào loa để phát âm thanh",
+    selectCorrectCharacter: "Chọn ký tự đúng mà bạn đã nghe",
+    playAudioFirst: "Phát âm thanh trước khi chọn",
+    chooseCorrectCharacter: "Chọn Ký Tự Đúng",
+    playing: "Đang phát",
+    audioError: "Lỗi phát âm thanh",
+    audioNotSupported: "Âm thanh không được hỗ trợ",
+    nextQuestion: "Câu hỏi tiếp theo",
+    finalScore: "Điểm cuối cùng",
+    score: "Điểm",
   },
   
   zh: {
@@ -282,6 +308,19 @@ const translations = {
     yourScore: "你的分数",
     goodWork: "做得好！",
     keepPracticing: "继续练习！",
+    
+    // Listening Exercise
+    listenAndChoose: "听并选择",
+    clickToPlay: "点击扬声器播放音频",
+    selectCorrectCharacter: "选择你听到的正确字符",
+    playAudioFirst: "先播放音频再选择",
+    chooseCorrectCharacter: "选择正确的字符",
+    playing: "播放中",
+    audioError: "音频播放错误",
+    audioNotSupported: "不支持音频",
+    nextQuestion: "下一题",
+    finalScore: "最终得分",
+    score: "得分",
   },
 };
 
