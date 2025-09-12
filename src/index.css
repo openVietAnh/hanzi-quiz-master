@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Chinese Learning App Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors - soft, learning-friendly palette */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 10% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 240 10% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Chinese-inspired primary colors */
+    --primary: 0 72% 58%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 0 72% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary colors */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 240 10% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Learning app specific colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 47%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 15 100% 94%;
+    --accent-foreground: 240 10% 20%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --radius: 0.5rem;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 0 72% 58%;
+
+    --radius: 0.75rem;
+
+    /* Learning app gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(0 72% 58%), hsl(15 85% 65%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 70% 45%));
+    --gradient-error: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 75% 65%));
+
+    /* Shadows for depth */
+    --shadow-card: 0 4px 6px -1px hsl(240 10% 20% / 0.1), 0 2px 4px -2px hsl(240 10% 20% / 0.1);
+    --shadow-button: 0 2px 4px -1px hsl(0 72% 58% / 0.3);
+    --shadow-quiz: 0 8px 25px -5px hsl(240 10% 20% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +126,52 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Chinese character support */
+  .chinese-text {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    line-height: 1.2;
+  }
+
+  /* Custom animations */
+  .animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0.3) translateY(20px); opacity: 0; }
+    50% { transform: scale(1.05) translateY(-10px); opacity: 0.8; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Learning progress indicators */
+  .progress-ring {
+    transform: rotate(-90deg);
+  }
+
+  .progress-ring circle {
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.5s ease-in-out;
   }
 }
