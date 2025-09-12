@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, Github } from "lucide-react";
 
 const SupportBubble = () => {
-  const [position, setPosition] = useState({ x: 20, y: 20 });
+  const [position, setPosition] = useState(() => ({
+    x: window.innerWidth - 80, // 60px bubble width + 20px margin
+    y: window.innerHeight - 80 // 60px bubble height + 20px margin
+  }));
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [hasMoved, setHasMoved] = useState(false);
