@@ -10,9 +10,18 @@ import { useLanguage } from "@/hooks/useLanguage";
 
 interface QuizPageProps {
   onBack: () => void;
+  exerciseType: "word-meaning" | "reverse-word-meaning";
 }
 
-const QuizPage = ({ onBack }: QuizPageProps) => {
+// Generate options for reverse mode (English to Chinese)
+const generateReverseOptions = (correctWord: ChineseWord): string[] => {
+  const otherWords = chineseWords.filter(w => w.id !== correctWord.id);
+  const randomWords = shuffleArray(otherWords).slice(0, 3);
+  const options = [correctWord.character, ...randomWords.map(w => w.character)];
+  return shuffleArray(options);
+};
+
+const QuizPage = ({ onBack, exerciseType }: QuizPageProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<ChineseWord[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
@@ -79,7 +88,10 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
     setTotalQuestions(prev => prev + 1);
 
     const currentQuestion = questions[currentQuestionIndex];
-    const correct = answer === currentQuestion.correctAnswer;
+    const correctAnswer = exerciseType === "word-meaning" 
+      ? currentQuestion.correctAnswer 
+      : currentQuestion.character;
+    const correct = answer === correctAnswer;
     setIsCorrect(correct);
 
     if (correct) {
@@ -89,9 +101,12 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
         description: t('greatJob'),
       });
     } else {
+      const correctAnswer = exerciseType === "word-meaning" 
+        ? currentQuestion.correctAnswer 
+        : currentQuestion.character;
       toast({
         title: t('incorrect'),
-        description: t('incorrectFeedback', { answer: currentQuestion.correctAnswer }),
+        description: t('incorrectFeedback', { answer: correctAnswer }),
         variant: "destructive",
       });
     }
@@ -213,41 +228,58 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
             <Card className="shadow-quiz bg-gradient-card border-0 animate-bounce-in">
               <CardHeader className="text-center">
                 <CardTitle className="text-sm text-muted-foreground mb-4">
-                  {t('chooseCorrectMeaning')}
+                  {exerciseType === "word-meaning" ? t('selectEnglishMeaning') : t('selectChineseTranslation')}
                 </CardTitle>
                 <div className="space-y-2">
-                  <div className="text-6xl chinese-text font-bold text-primary mb-2">
-                    {currentQuestion.character}
-                  </div>
-                  <div className="text-xl text-muted-foreground">
-                    {currentQuestion.pinyin}
-                  </div>
+                  {exerciseType === "word-meaning" ? (
+                    <>
+                      <div className="text-6xl chinese-text font-bold text-primary mb-2">
+                        {currentQuestion.character}
+                      </div>
+                      <div className="text-xl text-muted-foreground">
+                        {currentQuestion.pinyin}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-4xl font-bold text-primary mb-2">
+                      {currentQuestion.correctAnswer}
+                    </div>
+                  )}
                 </div>
               </CardHeader>
               
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2">
-                  {currentQuestion.options.map((option, index) => (
-                    <Button
-                      key={index}
-                      variant={
-                        isAnswered
-                          ? option === currentQuestion.correctAnswer
-                            ? "default"
-                            : option === selectedAnswer
-                            ? "destructive"
-                            : "secondary"
-                          : "outline"
-                      }
-                      className={`h-16 text-lg transition-smooth ${
-                        !isAnswered ? "hover:bg-primary hover:text-primary-foreground" : ""
-                      }`}
-                      onClick={() => handleAnswerSelect(option)}
-                      disabled={isAnswered}
-                    >
-                      {option}
-                    </Button>
-                  ))}
+                  {(exerciseType === "word-meaning" 
+                    ? currentQuestion.options 
+                    : generateReverseOptions(currentQuestion)
+                    ).map((option, index) => {
+                      const correctAnswer = exerciseType === "word-meaning" 
+                        ? currentQuestion.correctAnswer 
+                        : currentQuestion.character;
+                      
+                      return (
+                        <Button
+                          key={index}
+                          variant={
+                            isAnswered
+                              ? option === correctAnswer
+                                ? "default"
+                                : option === selectedAnswer
+                                ? "destructive"
+                                : "secondary"
+                              : "outline"
+                          }
+                          className={`h-16 text-lg transition-smooth ${
+                            !isAnswered ? "hover:bg-primary hover:text-primary-foreground" : ""
+                          } ${exerciseType === "reverse-word-meaning" ? "chinese-text" : ""}`}
+                          onClick={() => handleAnswerSelect(option)}
+                          disabled={isAnswered}
+                        >
+                          {option}
+                        </Button>
+                      );
+                    })}
                 </div>
 
                 {/* Feedback */}
@@ -265,7 +297,11 @@ const QuizPage = ({ onBack }: QuizPageProps) => {
                           <span className="text-lg font-medium">{t('incorrect')}</span>
                         </div>
                         <p className="text-muted-foreground">
-                          {t('correctAnswerIs', { answer: currentQuestion.correctAnswer })}
+                          {t('correctAnswerIs', { 
+                            answer: exerciseType === "word-meaning" 
+                              ? currentQuestion.correctAnswer 
+                              : currentQuestion.character 
+                          })}
                         </p>
                       </div>
                     )}

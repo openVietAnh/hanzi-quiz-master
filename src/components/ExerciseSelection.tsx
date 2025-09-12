@@ -6,7 +6,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 
 interface ExerciseSelectionProps {
   username: string;
-  onStartQuiz: () => void;
+  onStartQuiz: (type: "word-meaning" | "reverse-word-meaning") => void;
   onLogout: () => void;
 }
 
@@ -63,7 +63,41 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
                   <span>{t('realtimeStats')}</span>
                 </div>
                 <Button 
-                  onClick={onStartQuiz}
+                  onClick={() => onStartQuiz("word-meaning")}
+                  className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
+                >
+                  {t('startExercise')}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Reverse Word Meaning Exercise */}
+          <Card className="shadow-quiz bg-gradient-card border-0 hover:shadow-lg transition-smooth animate-slide-up" style={{animationDelay: '0.1s'}}>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
+                  <BookOpen className="text-primary-foreground" size={24} />
+                </div>
+                <Badge className="bg-success text-success-foreground">{t('available')}</Badge>
+              </div>
+              <CardTitle className="text-2xl chinese-text">{t('reverseWordMeaning')}</CardTitle>
+              <CardDescription className="text-base">
+                {t('reverseWordMeaningDesc')}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Clock size={16} />
+                  <span>{t('timedExercise')}</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Target size={16} />
+                  <span>{t('realtimeStats')}</span>
+                </div>
+                <Button 
+                  onClick={() => onStartQuiz("reverse-word-meaning")}
                   className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
                 >
                   {t('startExercise')}
@@ -73,7 +107,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
           </Card>
 
           {/* Coming Soon Exercises */}
-          <Card className="shadow-card bg-gradient-card border-0 opacity-60 animate-slide-up" style={{animationDelay: '0.1s'}}>
+          <Card className="shadow-card bg-gradient-card border-0 opacity-60 animate-slide-up" style={{animationDelay: '0.2s'}}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
@@ -93,7 +127,7 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             </CardContent>
           </Card>
 
-          <Card className="shadow-card bg-gradient-card border-0 opacity-60 animate-slide-up" style={{animationDelay: '0.2s'}}>
+          <Card className="shadow-card bg-gradient-card border-0 opacity-60 animate-slide-up" style={{animationDelay: '0.3s'}}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">

@@ -10,12 +10,14 @@ import ExerciseSelection from "./components/ExerciseSelection";
 import QuizPage from "./components/QuizPage";
 
 type AppState = "login" | "selection" | "quiz";
+type ExerciseType = "word-meaning" | "reverse-word-meaning";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const [currentState, setCurrentState] = useState<AppState>("login");
   const [currentUser, setCurrentUser] = useState<string>("");
+  const [exerciseType, setExerciseType] = useState<ExerciseType>("word-meaning");
 
   const handleLogin = (username: string) => {
     setCurrentUser(username);
@@ -27,7 +29,8 @@ const App = () => {
     setCurrentState("login");
   };
 
-  const handleStartQuiz = () => {
+  const handleStartQuiz = (type: ExerciseType) => {
+    setExerciseType(type);
     setCurrentState("quiz");
   };
 
@@ -48,7 +51,7 @@ const App = () => {
           />
         );
       case "quiz":
-        return <QuizPage onBack={handleBackToSelection} />;
+        return <QuizPage onBack={handleBackToSelection} exerciseType={exerciseType} />;
       default:
         return <LoginPage onLogin={handleLogin} />;
     }
