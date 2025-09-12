@@ -8,12 +8,13 @@ import Header from "./components/Header";
 import LoginPage from "./components/LoginPage";
 import ExerciseSelection from "./components/ExerciseSelection";
 import QuizPage from "./components/QuizPage";
+import WritingPage from "./components/WritingPage";
 import SupportBubble from "./components/SupportBubble";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 
-type AppState = "login" | "selection" | "quiz";
-type ExerciseType = "word-meaning" | "reverse-word-meaning";
+type AppState = "login" | "selection" | "quiz" | "writing";
+type ExerciseType = "word-meaning" | "reverse-word-meaning" | "writing";
 
 const queryClient = new QueryClient();
 
@@ -34,7 +35,11 @@ const App = () => {
 
   const handleStartQuiz = (type: ExerciseType) => {
     setExerciseType(type);
-    setCurrentState("quiz");
+    if (type === "writing") {
+      setCurrentState("writing");
+    } else {
+      setCurrentState("quiz");
+    }
   };
 
   const handleBackToSelection = () => {
@@ -54,7 +59,9 @@ const App = () => {
           />
         );
       case "quiz":
-        return <QuizPage onBack={handleBackToSelection} exerciseType={exerciseType} />;
+        return <QuizPage onBack={handleBackToSelection} exerciseType={exerciseType as "word-meaning" | "reverse-word-meaning"} />;
+      case "writing":
+        return <WritingPage onBack={handleBackToSelection} />;
       default:
         return <LoginPage onLogin={handleLogin} />;
     }

@@ -6,7 +6,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 
 interface ExerciseSelectionProps {
   username: string;
-  onStartQuiz: (type: "word-meaning" | "reverse-word-meaning") => void;
+  onStartQuiz: (type: "word-meaning" | "reverse-word-meaning" | "writing") => void;
   onLogout: () => void;
 }
 
@@ -127,22 +127,25 @@ const ExerciseSelection = ({ username, onStartQuiz, onLogout }: ExerciseSelectio
             </CardContent>
           </Card>
 
-          <Card className="shadow-card bg-gradient-card border-0 opacity-60 animate-slide-up h-full flex flex-col" style={{animationDelay: '0.3s'}}>
+          <Card className="shadow-card bg-gradient-card border-0 hover:shadow-lg transition-smooth animate-slide-up h-full flex flex-col" style={{animationDelay: '0.3s'}}>
             <CardHeader className="flex-shrink-0">
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
-                  <span className="chinese-text text-muted-foreground text-xl">写</span>
+                <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
+                  <span className="chinese-text text-primary-foreground text-xl">写</span>
                 </div>
-                <Badge variant="secondary">{t('comingSoon')}</Badge>
+                <Badge className="bg-success text-success-foreground">{t('available')}</Badge>
               </div>
-              <CardTitle className="text-2xl chinese-text text-muted-foreground">{t('writingExercise')}</CardTitle>
+              <CardTitle className="text-2xl chinese-text">{t('writingExercise')}</CardTitle>
               <CardDescription>
                 {t('writingDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow flex flex-col justify-end">
-              <Button disabled className="w-full">
-                {t('comingSoon')}
+              <Button 
+                onClick={() => onStartQuiz("writing")}
+                className="w-full bg-gradient-hero hover:opacity-90 transition-smooth shadow-button"
+              >
+                {t('startExercise')}
               </Button>
             </CardContent>
           </Card>

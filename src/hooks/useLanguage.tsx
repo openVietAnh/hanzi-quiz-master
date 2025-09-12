@@ -86,6 +86,20 @@ const translations = {
     leaderboard: "Leaderboard", 
     profile: "Profile",
     settings: "Settings",
+    
+    // Writing Exercise
+    characterToWrite: "Character to Write",
+    pinyin: "Pinyin",
+    meaning: "Meaning",
+    strokes: "Strokes",
+    writingArea: "Writing Area",
+    clear: "Clear",
+    submit: "Submit",
+    nextCharacter: "Next Character",
+    timeRemaining: "Time Remaining",
+    yourScore: "Your Score",
+    goodWork: "Good work!",
+    keepPracticing: "Keep practicing!",
   },
   
   vi: {
@@ -163,6 +177,20 @@ const translations = {
     leaderboard: "Bảng xếp hạng",
     profile: "Hồ sơ",
     settings: "Cài đặt",
+    
+    // Writing Exercise
+    characterToWrite: "Chữ cần viết",
+    pinyin: "Pinyin",
+    meaning: "Nghĩa",
+    strokes: "Nét",
+    writingArea: "Khu vực viết",
+    clear: "Xóa",
+    submit: "Nộp bài",
+    nextCharacter: "Chữ tiếp theo",
+    timeRemaining: "Thời gian còn lại",
+    yourScore: "Điểm của bạn",
+    goodWork: "Làm tốt!",
+    keepPracticing: "Tiếp tục luyện tập!",
   },
   
   zh: {
@@ -240,6 +268,20 @@ const translations = {
     leaderboard: "排行榜",
     profile: "个人资料",
     settings: "设置",
+    
+    // Writing Exercise
+    characterToWrite: "要写的字符",
+    pinyin: "拼音",
+    meaning: "含义",
+    strokes: "笔画",
+    writingArea: "书写区域",
+    clear: "清除",
+    submit: "提交",
+    nextCharacter: "下一个字符",
+    timeRemaining: "剩余时间",
+    yourScore: "你的分数",
+    goodWork: "做得好！",
+    keepPracticing: "继续练习！",
   },
 };
 
