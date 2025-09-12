@@ -29,14 +29,19 @@ const Header = () => {
           <Globe className="text-muted-foreground" size={18} />
           <Select value={language} onValueChange={(value) => setLanguage(value as Language)}>
             <SelectTrigger className="w-36 bg-background border border-border hover:bg-accent transition-smooth">
-              <SelectValue />
+              <SelectValue placeholder="Language">
+                <div className="flex items-center gap-2">
+                  <span>{languageOptions.find(opt => opt.value === language)?.flag}</span>
+                  <span>{languageOptions.find(opt => opt.value === language)?.label}</span>
+                </div>
+              </SelectValue>
             </SelectTrigger>
-            <SelectContent className="bg-background border border-border shadow-quiz">
+            <SelectContent className="bg-popover border border-border shadow-lg z-50" position="popper">
               {languageOptions.map((option) => (
                 <SelectItem 
                   key={option.value} 
                   value={option.value}
-                  className="hover:bg-accent cursor-pointer"
+                  className="hover:bg-accent focus:bg-accent cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
                     <span>{option.flag}</span>
