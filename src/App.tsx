@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import LoginPage from "./components/LoginPage";
 import ExerciseSelection from "./components/ExerciseSelection";
 import QuizPage from "./components/QuizPage";
+import SupportBubble from "./components/SupportBubble";
 
 type AppState = "login" | "selection" | "quiz";
 type ExerciseType = "word-meaning" | "reverse-word-meaning";
@@ -68,6 +69,7 @@ const App = () => {
             <div className="flex-1">
               {renderCurrentPage()}
             </div>
+            <SupportBubble />
           </div>
         </LanguageProvider>
       </TooltipProvider>
