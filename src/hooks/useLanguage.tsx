@@ -386,7 +386,7 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('vi');
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;

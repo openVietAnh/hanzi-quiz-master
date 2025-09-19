@@ -13,8 +13,7 @@ interface LoginPageProps {
 
 // Pre-configured users
 const validUsers = [
-  { username: "student1", password: "password1" },
-  { username: "student2", password: "password2" }
+  { username: "hothihang", password: "Hang1909" }
 ];
 
 const LoginPage = ({ onLogin }: LoginPageProps) => {
@@ -111,13 +110,6 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
               </Button>
             </form>
 
-            <div className="mt-6 p-4 bg-accent/50 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-2">{t('testAccounts')}</p>
-              <div className="space-y-1 text-sm">
-                <div>{t('username')}: student1, {t('password')}: password1</div>
-                <div>{t('username')}: student2, {t('password')}: password2</div>
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>
